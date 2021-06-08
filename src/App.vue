@@ -27,10 +27,17 @@
         <v-icon class="mr-1">mdi-home</v-icon>
         <span class="mr-2">Home</span>
       </v-btn>
-      <v-btn text :to="{ name: 'Cart' }" exact>
-        <v-icon class="mr-1">mdi-cart</v-icon>
-        <span class="mr-2">Cart</span>
-      </v-btn>
+      <v-badge
+        :content="cartCount.length"
+        :value="cartCount.length"
+        color="green"
+        overlap
+      >
+        <v-btn text :to="{ name: 'Cart' }" exact>
+          <v-icon class="mr-1">mdi-cart</v-icon>
+          <span class="mr-2">Cart</span>
+        </v-btn>
+      </v-badge>
     </v-app-bar>
 
     <v-main>
@@ -44,8 +51,13 @@
 <script>
 export default {
   name: "App",
-  data: () => ({
-    //
-  }),
+  computed: {
+    cartCount() {
+      return this.$store.getters.carts;
+    },
+  },
+  created() {
+    this.$store.dispatch("fetchCarts");
+  },
 };
 </script>

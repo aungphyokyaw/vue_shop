@@ -17,7 +17,8 @@ let routes = [
     component: Cart,
   },
   {
-    path: "/detail/:id",
+    path: "/details/:id",
+    props: true,
     name: "DetailsProduct",
     component: DetailsProduct,
   },
